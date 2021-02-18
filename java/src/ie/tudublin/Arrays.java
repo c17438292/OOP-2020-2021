@@ -27,7 +27,7 @@ public class Arrays extends PApplet {
             text(i, border * 0.5f, x);
         }
     }
-    
+
     // Return the sum of all the elements in an array
     float sum(float[] array) {
         float sum = 0;
@@ -120,12 +120,40 @@ public class Arrays extends PApplet {
         }
     }
 
-
     public void draw() {
         background(0);
         switch (mode) {
             case 0: {
                 // Bar chart
+                float w = width - 25;
+                float h = height - 25;
+                float recWidth = (w - 25) / 12;
+                int j = 120;
+
+                stroke(255);
+                line(25, 25, 25, height - 25);
+
+                stroke(255);
+                line(25, height - 25, width - 25, height - 25);
+
+                for (int i = 0; i < months.length; i++) {
+                    // where to put text and each bar
+                    float x = map(i, 0, rainfall.length, 25, w);
+                    // height of bars
+                    float y = map(rainfall[i], 0, 120, 25, h);
+                    // for hsb colours
+                    float colGap = map(i, 0, 12, 0, 255);
+
+                    fill(255);
+                    text(months[i], x, height - 10);
+                    fill(colGap, 255, 255);
+                    rect(x, h, recWidth, -y);
+
+                    fill(255);
+                    textSize(10);
+                    text(j, 5, x, y);
+                    j -= 10;
+                }
                 break;
             }
             case 1: {
